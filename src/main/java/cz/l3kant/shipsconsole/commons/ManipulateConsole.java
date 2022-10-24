@@ -9,8 +9,12 @@ public class ManipulateConsole {
     
     private Scanner sc = new Scanner(System.in);
     
-    public void write(String msg){
+    public void writeln(String msg){
         System.out.println(msg);
+    }
+    
+    public void write(String msg){
+        System.out.print(msg);
     }
     
     public String read(){

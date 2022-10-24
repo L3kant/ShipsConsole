@@ -6,39 +6,39 @@ import cz.l3kant.shipsconsole.commons.ManipulateConsole;
  * @author l3kant
  */
 public class Menu {
-    ManipulateConsole mp = new ManipulateConsole();
+    ManipulateConsole mc = new ManipulateConsole();
     
-    public void startMenu(){
+    public int startMenu(){
         boolean displayAgain = true;
+        int selOpt = 0;
         while (displayAgain) {
             String option = displayMenu();
             switch (option) {
                 case "1": 
-                    mp.write("New game - under construction");
-                    displayAgain = true;
+                    displayAgain = false;
+                    selOpt = 1;
                     break;
                 case "2": 
-                    mp.write("Load game - under construction");
-                    displayAgain = true;
+                    mc.writeln("Load game - under construction");
                     break;
                 case "3": 
-                    mp.write("Exit");
                     displayAgain = false;
                     break;
                 default:
-                    displayAgain = true;
+                    mc.writeln("Wrong option - try again");
             }     
         }
+        return selOpt;
     }
     
     private String displayMenu() {
-        mp.write("Ships");
-        mp.write("-----");
-        mp.write("1 - New game");
-        mp.write("2 - Load last game");
-        mp.write("3 - Quit");
-        mp.write("");
-        return mp.read();
+        mc.writeln("Ships");
+        mc.writeln("-----");
+        mc.writeln("1 - New game");
+        mc.writeln("2 - Load last game");
+        mc.writeln("3 - Quit");
+        mc.writeln("");
+        return mc.read();
     }
        
 }
