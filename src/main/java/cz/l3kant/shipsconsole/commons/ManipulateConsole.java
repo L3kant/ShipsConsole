@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class ManipulateConsole {
     
-    private Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
     
     public void writeln(String msg){
         System.out.println(msg);
@@ -17,8 +17,12 @@ public class ManipulateConsole {
         System.out.print(msg);
     }
     
+    public void writeEmpty(){
+        System.out.println();
+    }
+    
+    
     public String read(){
-        String response = sc.nextLine();
-        return response;
+        return sc.nextLine();
     }
 }
