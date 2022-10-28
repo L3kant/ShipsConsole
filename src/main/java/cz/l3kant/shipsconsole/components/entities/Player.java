@@ -1,4 +1,4 @@
-package cz.l3kant.shipsconsole.components;
+package cz.l3kant.shipsconsole.components.entities;
 
 import cz.l3kant.shipsconsole.commons.GameField;
 import cz.l3kant.shipsconsole.commons.ManipulateConsole;
@@ -11,17 +11,14 @@ import cz.l3kant.shipsconsole.commons.ships.Ship;
 /**
  * @author l3kant
  */
-public class Player {
+public class Player extends Entity{
     
-    GameField playerField = new GameField(10,10);
     ManipulateConsole mc = new ManipulateConsole();
+    GameField playerField = super.field;
     
+    @Override
     public void start(){   
-        Ship [] boats = new Ship [3];
-        Ship [] destroyers = new Ship [2];
-        Ship [] cruisers = new Ship [2];
-        Ship [] battleships = new Ship [1];
-        
+                
         playerField.displayField();
         mc.writeEmpty();
         for(int i = 0; i<boats.length; i++){ 
@@ -63,18 +60,11 @@ public class Player {
                 xAxis = Integer.valueOf(coordinates.split(";")[0]);
                 yAxis = Integer.valueOf(coordinates.split(";")[1]);
                 switch(type){
-                    case "boat":
-                        ship = new Boat(xAxis, yAxis);
-                        break;
-                    case "destroyer":
-                        ship = new Destroyer(xAxis, yAxis);
-                        break;
-                    case "cruiser":
-                        ship = new Cruiser(xAxis, yAxis);
-                        break;
-                    case "battleship":
-                        ship = new Battleship(xAxis, yAxis);
-                        break;
+                    case "boat" -> {ship = new Boat(xAxis, yAxis);}
+                    case "destroyer" -> {ship = new Destroyer(xAxis, yAxis);}
+                    case "cruiser" -> {ship = new Cruiser(xAxis, yAxis);}
+                    case "battleship" -> {ship = new Battleship(xAxis, yAxis);}
+                    default -> {ship = null;}
                 }
                 again = !playerField.setShipToField(ship);
             }catch(Exception e){

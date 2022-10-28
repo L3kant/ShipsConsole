@@ -12,7 +12,7 @@ public class Menu {
         boolean displayAgain = true;
         int selOpt = 0;
         while (displayAgain) {
-            String option = displayMenu();
+            String option = displayStartMenu();
             switch (option) {
                 case "1": 
                     displayAgain = false;
@@ -31,7 +31,7 @@ public class Menu {
         return selOpt;
     }
     
-    private String displayMenu() {
+    private String displayStartMenu() {
         mc.writeln("Ships");
         mc.writeln("-----");
         mc.writeln("1 - New game");

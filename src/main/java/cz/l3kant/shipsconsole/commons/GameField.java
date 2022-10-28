@@ -70,9 +70,10 @@ public class GameField {
     public void displayPlayerField(Ship [] boats, Ship [] destroyers, 
             Ship [] cruisers, Ship [] battleships) {
         if(clrProtZone){
-            clearProtZone();
+            clearProtZone(this);
             clrProtZone = false;
         }
+        mc.writeln("PLAYER FIELD");
         for(int i=0; i<field.length; i++){
             for (Object[] field11 : field[i]) {
                 mc.write(field11[0].toString());
@@ -90,10 +91,34 @@ public class GameField {
                 case 8 -> mc.writeln(showShipsState(battleships));
                 default -> mc.writeEmpty();
             }
-
+        }           
+    }
+    
+    public void displayEnemyField(Ship [] boats, Ship [] destroyers, 
+            Ship [] cruisers, Ship [] battleships, GameField hiddenField) {
+        if(hiddenField.clrProtZone){
+            clearProtZone(hiddenField);
+            hiddenField.clrProtZone = false;
         }
-
-                
+        mc.writeln("ENEMY FIELD");
+        for(int i=0; i<field.length; i++){
+            for (Object[] field11 : field[i]) {
+                mc.write(field11[0].toString());
+                mc.write("|");
+            }
+            switch(i){
+                case 0 -> mc.writeln(EMPTYSYMBOL + "Enemy fleet");
+                case 1 -> mc.writeln(EMPTYSYMBOL + "Boats:");
+                case 2 -> mc.writeln(showShipsState(boats));
+                case 3 -> mc.writeln(EMPTYSYMBOL + "Destroyers:");
+                case 4 -> mc.writeln(showShipsState(destroyers));
+                case 5 -> mc.writeln(EMPTYSYMBOL + "Cruisers:");
+                case 6 -> mc.writeln(showShipsState(cruisers));
+                case 7 -> mc.writeln(EMPTYSYMBOL + "Battleships:");
+                case 8 -> mc.writeln(showShipsState(battleships));
+                default -> mc.writeEmpty();
+            }
+        }           
     }
     
     public boolean setShipToField(Ship ship) {
@@ -102,10 +127,15 @@ public class GameField {
         
         //can be displayed
         for(int[] shipPostion: ship.getPostion()){
-             
-            if (!field[shipPostion[1]][shipPostion[0]][0].equals(EMPTYSYMBOL)){
+            
+            if(shipPostion[0] <= width && shipPostion[1] <= height) {
+                if (!field[shipPostion[1]][shipPostion[0]][0].equals(EMPTYSYMBOL)){
+                    success = false;
+                }
+            } else {
                 success = false;
             }
+             
         }  
         
         if(success){
@@ -146,8 +176,8 @@ public class GameField {
         }
     }
     
-    private void clearProtZone(){
-        for (Object[][] field1 : field) {
+    private void clearProtZone(GameField gameField){
+        for (Object[][] field1 : gameField.field) {
             for (Object[] field11 : field1) {
                 if(field11[0].equals(PROTZONESYMBOL)){
                    field11[0] = EMPTYSYMBOL; 
@@ -166,5 +196,14 @@ public class GameField {
         }
         return fleet.toString();                    
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+    
     
 }
