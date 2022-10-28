@@ -1,7 +1,5 @@
 package cz.l3kant.shipsconsole;
 
-import cz.l3kant.shipsconsole.commons.GameField;
-import cz.l3kant.shipsconsole.commons.ManipulateConsole;
 import cz.l3kant.shipsconsole.components.Menu;
 import cz.l3kant.shipsconsole.components.Player;
 
@@ -14,7 +12,6 @@ public class App {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ManipulateConsole mc = new ManipulateConsole();
         Menu menu = new Menu();
         Player player = new Player();
         
@@ -23,9 +20,10 @@ public class App {
                 player.start();
                 break;
             case 2:
+                break;
             case 3:
-            default:
-                mc.writeln("Exit");
+                System.exit(0);
+                break;
         }        
     }
     

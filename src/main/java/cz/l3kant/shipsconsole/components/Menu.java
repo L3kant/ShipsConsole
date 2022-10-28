@@ -37,7 +37,7 @@ public class Menu {
         mc.writeln("1 - New game");
         mc.writeln("2 - Load last game");
         mc.writeln("3 - Quit");
-        mc.writeln("");
+        mc.writeEmpty();
         return mc.read();
     }
        
